@@ -1,15 +1,14 @@
-Welcome to your new dbt project!
+# DBT Interview Project
 
-### Using the starter project
+Welcome to the **DBT Interview Project**! This repository demonstrates a refactoring of a SQL query into modular, maintainable dbt models following modern **best practices** for analytics engineering.
 
-Try running the following commands:
-- dbt run
-- dbt test
+---
 
+## Project Overview
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [dbt community](https://getdbt.com/community) to learn from other analytics engineers
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+This project transforms order data from a variety of source tables (`orders`, `payments`, `addresses`, `devices`) into a final **fact table** called `fct_orders` that can be used for reporting and analysis.
+
+**Key Goals:**
+1. Demonstrate dbt models that separate staging, intermediate, and marts layers.
+2. Incorporate tests and documentation in YAML files.
+3. Provide discussion points about data assumptions, quality checks, and model design decisions.

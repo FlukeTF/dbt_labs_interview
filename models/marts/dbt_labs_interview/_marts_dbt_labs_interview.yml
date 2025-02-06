@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Fact table consolidating order, payment, device, and address data for analytics."
+    columns:
+      - name: order_id
+        description: "Unique order identifier."
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        description: "Identifier of the user placing the order."
+        tests:
+          - not_null
+      - name: created_at
+        description: "Timestamp of when the order was initially created."
+      - name: order_status
+        description: "status of the order."
+      - name: order_status_category
+        description: "Normalized status category (e.g., 'paid, 'completed', 'shipped')."
+      - name: country_type
+        description: "Classification of the order's shipping country (US, International, or Null)."
+      - name: purchase_device_type
+        description: "Normalized device grouping (desktop, mobile-app, mobile-web, etc.)."
+      - name: purchase_device
+        description: "Type of device."
+      - name: user_type
+        description: "Indicates whether the user is 'new' or 'repeat' (based on first order logic)."
+      - name: amount_total_cents
+        description: "Order total in cents, from the orders table."
+      - name: gross_total_amount_cents
+        description: "Sum of completed payments in cents."
+      - name: total_amount_cents
+        description: "Order total in cents, fallback to gross total if not USD."
+      - name: gross_tax_amount_cents
+        description: "Sum of all completed tax amounts, in cents."
+      - name: gross_amount_cents
+        description: "Sum of the base completed amounts, in cents."
+      - name: gross_shipping_amount_cents
+        description: "Sum of the completed shipping amounts, in cents."
+      - name: amount_total
+        description: "Order total in dollars (amount_total_cents / 100)."
+      - name: gross_total_amount
+        description: "Gross payment total in dollars (gross_total_amount_cents / 100)."
+      - name: total_amount
+        description: "Calculated total in dollars, fallback to gross total if not USD."
+      - name: gross_tax_amount
+        description: "Completed tax amount in dollars."
+      - name: gross_amount
+        description: "Completed base amount in dollars."
+      - name: gross_shipping_amount
+        description: "Completed shipping amount in dollars."

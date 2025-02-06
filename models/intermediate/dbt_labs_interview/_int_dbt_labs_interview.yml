@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: int_interview_task__first_order
+    description: "Determines the non-cancelled first order for each user."
+    columns:
+      - name: user_id
+        description: "User identifier."
+        tests:
+          - not_null
+      - name: first_order_id
+        description: "Earliest non-cancelled order_id for each user."
+        tests:
+          - not_null
+
+  - name: int_interview_task__order_devices
+    description: "Determines the device used by each order (based on earliest event)."
+    columns:
+      - name: order_id
+        description: "Unique identifier linking to orders."
+        tests:
+          - not_null
+      - name: device
+        description: "Device type determined from the earliest device event for that order."
+
+  - name: int_interview_task__order_payments
+    description: "Aggregates payment amounts for completed payment records."
+    columns:
+      - name: order_id
+        description: "Unique identifier linking to orders."
+        tests:
+          - not_null
+      - name: gross_tax_amount_cents
+        description: "Sum of all completed payment tax amounts for each order, in cents."
+      - name: gross_amount_cents
+        description: "Sum of all completed payment amounts for each order, in cents."
+      - name: gross_shipping_amount_cents
+        description: "Sum of all completed shipping amounts for each order, in cents."
+      - name: gross_total_amount_cents
+        description: "Total of all completed payments (tax + amount + shipping) for each order, in cents."
