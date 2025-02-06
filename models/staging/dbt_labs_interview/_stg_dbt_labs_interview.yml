@@ -1,0 +1,81 @@
+version: 2
+
+models:
+  - name: stg_interview_task__addresses
+    description: "Addresses data from the source table."
+    columns:
+      - name: order_id
+        description: "Primary key from the orders table."
+        tests:
+          - not_null
+      - name: user_id
+        description: "User Identifier"
+      - name: address
+        description: "Address of the User"
+      - name: state
+        description: "Two-letter state code."
+      - name: country_code
+        description: "Two-letter country code."
+  
+  - name: stg_interview_task__devices
+    description: "Captured device information for each order event."
+    columns:
+      - name: order_id
+        description: "Order identifier for linking device usage data."
+      - name: device
+        description: "Type of device used by the user (e.g. web, mobile, tablet, android, ios-app)."
+      - name: type
+        description: "Type of event (e.g. item, order, cart)"
+      - name: created_at
+        description: "Event created at timestamp"
+      - name: updated_at
+        description: "Event updated at timestamp"
+
+  - name: stg_interview_task__orders
+    description: "Source orders data."
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order."
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        description: "Identifier for the user placing the order."
+        tests:
+          - not_null
+      - name: created_at
+        description: "Order Created at timestamp."
+      - name: updated_at
+        description: "Order Updated at timestamp."
+      - name: shipped_at
+        description: "Order shipped timestamp."
+      - name: currency
+        description: "The currency used for the order."
+      - name: status
+        description: "Status of the order (e.g. paid, pending, cancelled, completed, shipped, etc.)."
+      - name: amount_total_cents
+        description: "Total monetary amount in cents."
+      - name: shipping_method
+        description: "The method or carrier used for shipping (e.g. UPS, USPS, FEDEX, LOCAL, RUSHED, etc)."
+
+  - name: stg_interview_task__payments
+    description: "Raw payment transaction data, standardized for downstream models."
+    columns:
+      - name: order_id
+        description: "Order identifier related to this payment."
+        tests:
+          - not_null
+      - name: payment_id
+        description: "Payment identifier."
+      - name: payment_type
+        description: "Type of payment used (e.g. cash, coupon, paypal, credit_card, other, etc.)."
+      - name: status
+        description: "Status of the payment (e.g. paid, pending, shipped, cancelled, completed, etc.)."
+      - name: amount_cents
+        description: "Payment amount in cents."
+      - name: tax_amount_cents
+        description: "Tax component of the payment, in cents."
+      - name: amount_shipping_cents
+        description: "Shipping amount, in cents."
+      - name: created_at
+        description: "Payment creation timestamp."

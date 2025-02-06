@@ -36,7 +36,27 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
+  jaffle_shop:
+    staging:
+      +materialized: view
+      +schema: stg
+      dbt_quickstart:
+        +schema: stg_dbt_quickstart
+      dbt_labs_interview:
+        +schema: stg_interview_task
+
+    intermediate:
       +materialized: table
+      +schema: int
+      dbt_quickstart:
+        +schema: int_dbt_quickstart
+      dbt_labs_interview:
+        +schema: int_interview_task      
+
+    marts:
+      +materialized: table
+      +schema: marts
+      dbt_quickstart:
+        +schema: marts_dbt_quickstart
+      dbt_labs_interview:
+        +schema: marts_interview_task
