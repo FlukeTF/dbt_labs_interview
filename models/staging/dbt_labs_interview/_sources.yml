@@ -1,0 +1,29 @@
+version: 2
+
+sources:
+
+  - name: interview_task
+    database: dbt-public
+    schema: interview_task
+    tables:
+      - name: orders
+        columns:
+          - name: order_id
+            tests:
+              - not_null
+              - unique
+              
+      - name: devices
+
+      - name: payments
+        columns:
+          - name: order_id
+            tests:
+              - not_null
+
+      - name: addresses
+        columns:
+          - name: order_id
+            tests:
+              - not_null
+              - unique
